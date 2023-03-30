@@ -1,0 +1,94 @@
+{% extends 'nav.html' %}
+
+{% block title %}
+Airspace login
+{% endblock title %}
+{% block style %}
+<style>
+.btn{
+    front-family: "Raleway", sans-serif;
+    front-weight: 500;
+    front-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 50px;
+    transition: 0.5s;
+    color: #3498db;
+    border: 2px solid #3498db;
+    background-color: black;
+    color: white;
+    
+}
+
+.btn:hover{
+    background-color: black;
+    color: white;
+}
+</style>
+{% endblock style %}
+
+{% block body %} 
+
+<section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+
+       <div class="container">
+  <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+      
+      <h1 data-aos="fade-up">login</h1>
+      <div class="container" data-aos="fade-up" data-aos-delay="400">
+      </div>
+{% for message in messages %}
+      <div class="alert alert-{{message.tags}}-dismissible fade show" role="alert">
+        <strong></strong>{{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+        <form action="/leboauth/login/" method="post">{% csrf_token %}
+        
+
+          <br>
+          
+          <label for="email">Email</label>
+          <div class="form-group">
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+
+          <br>
+
+          <label for="pass1">Password</label>
+          <div class="form-group">
+            <input type="password" class="form-control" id="pass1" name="pass1" required>
+          </div>
+
+          <br>
+
+          <button type="submit" class="btn btn-outline-dark btn-sm btn-block">login</button>
+           
+          </br>
+        
+          <hr>
+
+          New user? <a href="/leboauth/signup/">Signup</a>
+          <br>
+          <span>Forgot Password? <a href="/leboauth/password-reset">Reset</a></span>
+        </br>
+          
+        </form>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-6"></div>
+
+  </div>
+</div>
+</div>
+</div>
+</section>
+
+{% endblock body %}
