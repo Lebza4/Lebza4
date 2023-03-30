@@ -8,12 +8,12 @@ def home(request):
     print (current_user)
     allProds =[]
     catprods = Product.objects.values('category','id')
-    cats = {item['categoty'] for item in catprods}
+    cats = {item['category'] for item in catprods}
     for cat in cats:
-        prod = Product.object.filter(category=cat)  
+        prod = Product.objects.filter(category=cat)  
         n = len(prod)
         nSlides = n // 4 + ceil(n / 4)-((n /4)) - ((n // 4)) 
-        allProds.append([prod, range(1, nSlides), nSlides])
+        allProds.append([prod, range(1, int(nSlides)), int(nSlides)])
         
     params = {'allProds':allProds}
     return render(request,'index.html',params)
