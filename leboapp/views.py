@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from leboapp.models import Product
 from math import ceil
+from leboapp import keys
 
 # Create your views here.
 def home(request):

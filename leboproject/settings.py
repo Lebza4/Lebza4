@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+import dj_database_url
 from django.contrib.messages import constants as messages
 from pathlib import Path
 
@@ -83,7 +84,9 @@ DATABASES = {
     }
 }
 
-
+DATABASES={
+    "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
