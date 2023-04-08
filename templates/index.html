@@ -11,8 +11,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{% static 'assets/img/favicon.png' %} " rel="icon">
-  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
@@ -60,6 +59,14 @@
           
 
     {% if request.user.is_authenticated %}
+
+    <button type="button" clas="btn btn-dark" id="popcart" 
+    data-container="body" data-toggle="popover" data-placement="bottom" 
+    data-html="true" data-content="vivamus sagittis lacus vel augue laoreet ratrum faucibus.">
+
+
+    Cart(<span id="cart">0</span>)
+        </button>
 
 
           <li><a class="getstarted scrollto" href=>Welcome {{user.username}}</a></li>
@@ -114,6 +121,16 @@
     
 
    
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
     <!-- ======= Contact Us Section ======= -->
     <section id="contact" class="contact">
@@ -318,6 +335,27 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+
+  <script>
+          if (localStorage.getItem('cart') ==null) {
+              var cart ={};
+          } else { 
+              cart = JSON.parse(localStorage.getItem('cart'));
+              updateCart('cart');
+
+          }
+
+          $('.divpr').on('click', 'button.cart', function() {
+              var idstr = this.id.toString();
+
+              if (Cart[idstr] ! = undefined) {
+
+              }
+          }
+
+
+  </script>
+
   <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
   <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
