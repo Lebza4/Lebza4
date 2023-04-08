@@ -23,6 +23,9 @@ from django.conf import settings
 admin.site.site_header = "AIRSPACE"
 admin.site.site_Footer = "LEBO admin"
 
+version = settings.VERSION
+print(version)  # Output: (1, 0, 0)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('leboapp.urls')),
