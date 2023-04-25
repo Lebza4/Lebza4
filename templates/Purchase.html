@@ -1,0 +1,143 @@
+{% extends 'nav.html' %}
+{% block title %}
+AIRSPACE
+{% endblock title %}
+
+{% block body %}
+
+{% load static %}
+{% for product,range, nslides in allProds %}
+
+<div class="container">
+    <h3 class="my-3 text-center text-success bg-light">{{product.0.category}} Flashsale</h3>
+</div>
+<div class="container">
+    <div class="row">
+
+
+{% for i in product %}
+
+<div class="col-md-3 mt-3">
+<img src='/media/{{i.image}}' class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-tittle" id="namepr{{i.id}}">{{i.product_name}}</h5>
+                                <p class="card-text"{{i.desc|slice:"0:53"}}...</p>
+                                <h6 class="card-tittle">price:<span id="pricepr{{i.id}}">{{i.price}}</span></h6>
+                                <span id="divpr{{i.id}}" class="divpr">
+
+
+                                    <button id="pr{{i.id}}" class="btn btn-success cart btn-sm mt-0">AddToCart></button>
+                                </span>
+
+                            <a href="/media/{{i.image}}"> <button class="btn btn-success btn-sm cart">View</button></a>
+
+
+
+                            </div>
+                        </div>
+
+{% endfor %}
+                    </div>
+                </div>
+{% endfor %}
+<!--======= Footer =======-->
+<footer id="footer">
+    <div class="footer-top">
+
+    </div>
+    
+    <div class="container">
+
+        <div class="credits">
+            <br>
+            Developed by <a href="/">LEBO</a>
+        </div>
+    </div>
+</footer>
+<!--End of footer-->
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.3.3.1js"
+integrity="sha256-2KoK7MbOvxpgUVvAk/HJ2jigoSYS2auK4Pfzbm7uH60="
+crossorigin="anonymous"></script
+<script src="http://dnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQylcHdj/yoi7FRNXMRBu5WHdZYulhA6ZOblgut" crossorigin="anonymous"></script>
+<script src="http://stackpath.bootsrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hclog6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+</script>
+    //find pout the cord from local storage
+    if (localStorage.getItem('cart')==null){var cart ={}
+}else {
+    cart=JSON.parse(localStorage.getItem('cart'));
+    updatecart(cart);
+
+
+}
+
+//add or increment code
+//$('.cart').click(function() {
+$('.divpr').on('click', 'button.cart', function(){
+    var idstr = this.id.toString();
+
+    if (cart[idstr] != undefined) {
+        qty = cart[idstr][0]+1;
+
+    }else {
+        qty=1;
+        name = document.getElementById('name' + idstr).innerHTML;
+        price = document.getElementById('price' + idstr).innerHTML;
+        cart[idstr] = [qty, name, price];
+
+    } 
+    updatecart(cart);
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    docement.getElementById('cart').InnerHTML = Object.keys(cart).length;
+
+});
+
+//add pop over to cart
+
+$('#popcart').popover();
+updatepopover(cart);
+
+function updatePopover(cart) {
+    console.log('we are inside update popover');
+    var popStr="";
+    var popStr -popStr + "<h5> cart for your items in my shopping cart </h5>
+    <div class='mx-2 my-2'>";
+    var i = 1;
+    for (var item in cart){
+        popStr = popStr + "<br>" + "</br>" + "</br>. ";
+        popStr = popStr document.getElementById('name' + item).innerHTML.
+        slice(0, 19 ) +"..." + "<br>" +cart[item][0] + "</br>"+ "Qty" + '<br>';
+        i = i + i;
+    }
+
+    popStr = popStr +"</div> <a href= '/checkout'><button class='btn btn-success' id='clearCart'>checkout</button></a> <button class='btn ntn-dark'
+    onclick='clearcart()' id='clearcart'>ClearCart</button>"
+    document.getElementById('popCart').setAttribute('data-content', popStr); 
+    $('#popcart').popover('show');
+
+}
+function clearCart(){
+    cart = JSON.parse(localStorage.getItem('cart'));
+    for (var item in cart) {
+        docement.getElementById('div' + item).innerHTML ='<button id = "' + item + "' class="btn btm-success cart">Add to Cart</button>'
+
+    }
+    localStorage.clear();
+    cart = {};
+    updateCart(cart);
+
+}
+function updateCart(cart);
+var sum = 0;
+for (var item in cart) {
+    sum = sum + cart[item][0];
+}
+}
+{% endblock script %}
+
+
+
+{% endblock body %}
+
