@@ -133,8 +133,15 @@ function updateCart(cart);
 var sum = 0;
 for (var item in cart) {
     sum = sum + cart[item][0];
+    document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "'class= 'btn btn-success minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "'class='btn btn-success plus'> + </button>";
+
 }
+localStorage.setItem('cart', JSON.stringify(cart));
+docement.getElementById('cart').innerHTML = sum;
+console.log('cart');
+updatePopover(cart);
 }
+
 {% endblock script %}
 
 
